@@ -1,4 +1,4 @@
-import db from '../config/database';
+import db from '../config/database-sqlite';
 import { Fund, FundNavHistory, FundHoldings } from '../models/Fund';
 
 export class FundService {
@@ -79,7 +79,14 @@ export class FundService {
         fundData.status || '正常'
       ]
     );
-    return result.rows[0];
+    
+    // For SQLite, RETURNING * is removed, so query the inserted row
+    const queryResult = await db.query<Fund>(
+      'SELECT * FROM funds WHERE fund_code = $1',
+      [fundData.fund_code]
+    );
+    
+    return queryResult.rows[0];
   }
 
   async update(id: number, fundData: Partial<Fund>): Promise<Fund | null> {

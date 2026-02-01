@@ -194,7 +194,7 @@
       </div>
     </van-popup>
 
-    <van-calendar v-model:show="showDatePicker" @confirm="onDateConfirm" />
+    <van-calendar v-model:show="showDatePicker" :min-date="minDate" :max-date="maxDate" @confirm="onDateConfirm" />
 
     <!-- 持仓详情（曲线） -->
     <van-popup v-model:show="showDetail" position="bottom" round :style="{ height: '80%' }">
@@ -246,6 +246,8 @@ import * as echarts from 'echarts'
 import api from '@/services/api'
 import { fundAPI } from '@/services/fund'
 import { recognizeImage } from '@/utils/ocr'
+import { subYears } from 'date-fns/subYears'
+import { addYears } from 'date-fns/addYears'
 
 const router = useRouter()
 
@@ -268,6 +270,9 @@ const displayMode = ref<'est' | 'nav'>('est')
 const activeTab = ref(0)
 
 const refreshTimer = ref<any>(null)
+
+const minDate = subYears(new Date(), 10)
+const maxDate = new Date()
 
 // detail popup
 const showDetail = ref(false)
@@ -429,7 +434,7 @@ async function searchFunds() {
   const kw = fundSearchKeyword.value.trim()
   if (!kw) return
   try {
-    const res = await fundAPI.searchFunds(kw)
+    const res = await fundAPI.search(kw, 20)
     searchResults.value = res.data?.funds || []
   } catch (e: any) {
     showToast(e?.response?.data?.message || '搜索失败')

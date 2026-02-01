@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { AppError } from '../middleware/errorHandler';
-import db from '../config/database';
+import db from '../config/database-sqlite';
 import portfolioService from '../services/portfolioService';
 import { authenticate, optionalAuth } from '../middleware/auth';
 import fundService from '../services/fundService';
@@ -58,10 +58,10 @@ export const addHolding = async (req: Request, res: Response, next: NextFunction
           fund_name: String(fundNameRaw || code),
           fund_type: '其他',
           fund_company: '第三方数据源',
-          established_date: undefined,
-          fund_size: undefined,
-          manager_id: undefined,
-          benchmark_index: undefined,
+          established_date: null,
+          fund_size: null,
+          manager_id: null,
+          benchmark_index: null,
           status: '正常'
         } as any);
         fundId = Number((created as any).id);

@@ -3,7 +3,7 @@ import fundService from './fundService';
 import valuationService from './valuationService';
 import portfolioService from './portfolioService';
 import analysisService from './analysisService';
-import db from '../config/database';
+import db from '../config/database-sqlite';
 import { logger } from '../utils/logger';
 
 export class RealFundDataCollector extends BaseDataCollector {

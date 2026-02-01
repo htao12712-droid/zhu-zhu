@@ -8,7 +8,7 @@ import dotenv from 'dotenv';
 import { logger } from './utils/logger';
 import { errorHandler } from './middleware/errorHandler';
 import { rateLimiterMiddleware } from './middleware/rateLimiter';
-import db from './config/database';
+import db from './config/database-sqlite';
 import timeSeriesService from './services/timeSeriesService';
 import dataCollectorManager from './services/dataCollectorService';
 import notificationService from './services/notificationService';
@@ -102,7 +102,7 @@ async function startServer() {
   try {
     await db.initialize();
     logger.info('Database initialized successfully');
-    const autoInit = (process.env.AUTO_INIT_DB || 'true') === 'true';
+    const autoInit = (process.env.AUTO_INIT_DB || 'false') === 'true';
     if (autoInit) {
       try {
         const schemaFile = path.join(__dirname, '../database/schema.sql');

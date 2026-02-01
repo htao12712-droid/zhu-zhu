@@ -1,4 +1,4 @@
-import db from '../config/database';
+import db from '../config/database-sqlite';
 import { Index, IndexValuation, IndexFund } from '../models/Valuation';
 
 export class ValuationService {

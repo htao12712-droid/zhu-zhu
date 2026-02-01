@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import { logger } from '../utils/logger';
-import db from '../config/database';
+import db from '../config/database-sqlite';
 import fundService from './fundService';
 import valuationService from './valuationService';
 

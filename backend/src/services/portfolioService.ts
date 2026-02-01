@@ -1,4 +1,4 @@
-import db from '../config/database';
+import db from '../config/database-sqlite';
 import authorityProviderService from './authorityProviderService';
 import { logger } from '../utils/logger';
 import { UserHolding, SimulatedPortfolio, SimulatedPortfolioAllocation, StopLossProfitSetting } from '../models/Portfolio';

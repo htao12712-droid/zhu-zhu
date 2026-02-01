@@ -4,7 +4,7 @@ import dataCollectorManager from './dataCollectorService';
 import portfolioService from './portfolioService';
 import valuationService from './valuationService';
 import notificationService from './notificationService';
-import db from '../config/database';
+import db from '../config/database-sqlite';
 
 export class SchedulerService {
   private static instance: SchedulerService;

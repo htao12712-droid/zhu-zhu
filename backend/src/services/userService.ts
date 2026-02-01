@@ -1,4 +1,4 @@
-import db from '../config/database';
+import db from '../config/database-sqlite';
 import { User } from '../models/User';
 
 export class UserService {
